@@ -1,5 +1,3 @@
 Vt = a,b,c
 Vn = A,B,C,S
-A -> aA|E
-B -> bB|E
-C -> cC|E
+AB -> bBa

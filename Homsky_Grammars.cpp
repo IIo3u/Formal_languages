@@ -205,6 +205,6 @@ int main()
     }
 
     cout << "-----------------------------------------------\n";
-    cout << "Your grammar type:" << NewGram.DefineGrammarType(NewGram) << endl;
+    cout << "Your grammar type: " << NewGram.DefineGrammarType(NewGram) << endl;
     cout << "-----------------------------------------------\n";
 }
