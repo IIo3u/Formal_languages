@@ -129,7 +129,8 @@ public:
                 }
                 else
                 {
-                    if ((Find_letter(NewGram.Terminals, defRpart[0]) && Find_letter(NewGram.NTerminals, defRpart[1])) || (Find_letter(NewGram.Terminals, defRpart[1]) && Find_letter(NewGram.NTerminals, defRpart[0])))
+                    if ((Find_letter(NewGram.Terminals, defRpart[0]) && Find_letter(NewGram.NTerminals, defRpart[1])) ||
+                        (Find_letter(NewGram.Terminals, defRpart[1]) && Find_letter(NewGram.NTerminals, defRpart[0])))
                     {
                         GrammarType = 3;
                     }
@@ -156,7 +157,7 @@ bool Find_letter(string stroke, char letter)
         }
     }
     return statement;
-}
+}   
 
 int main()
 {
