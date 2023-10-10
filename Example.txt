@@ -1,4 +1,4 @@
 Vt = a,b,c
-Vn = A,B,C,S
-A -> a|Ba
-B -> b|Bb|Ab
+Vn = Q,S
+S -> aQb|accb
+Q -> cSc

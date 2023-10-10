@@ -76,7 +76,7 @@ public:
             buffer.push_back('|');
             for (int i = j; i < buffer.length(); i++)   // Правая часть
             {
-                if (buffer[i] == '|')
+                if (buffer[i] == '|')                   // Код, предусматривающий варианты ввода такие как: "A->aA|aaA|E"
                 {
                     Rule NewRule(Lpart, Rpart);
                     this->RulesArray.push_back(NewRule);
@@ -90,60 +90,75 @@ public:
 
         }
     };
-    int DefineGrammarType(Grammar NewGram)
+    
+};
+
+
+double DefineGrammarType(Grammar NewGram)
+{
+    double GrammarType = 0;
+    for (int i = 0; i < NewGram.RulesArray.size(); i++)
     {
-        int GrammarType = 0;
-        for (int i = 0; i < NewGram.RulesArray.size(); i++)
+        string defLpart = NewGram.RulesArray[i].Lpart;
+        string defRpart = NewGram.RulesArray[i].Rpart;
+        int LLen = defLpart.length();
+        int RLen = defRpart.length();
+        if (LLen > RLen)
         {
-            string defLpart = NewGram.RulesArray[i].Lpart;
-            string defRpart = NewGram.RulesArray[i].Rpart;
-            int LLen = defLpart.length();
-            int RLen = defRpart.length();
-            if (LLen > RLen)
+            return GrammarType = 0;
+        }
+        for (int j = 0; j < LLen; j++)
+        {
+            if (defLpart[j] == 'E')
             {
                 return GrammarType = 0;
             }
-            for (int j = 0; j < LLen; j++)
+            else
             {
-                if (defLpart[j] == 'E')
+                if (Find_letter(NewGram.Terminals, defLpart[j]))
                 {
-                    return GrammarType = 0;
+                    GrammarType = 1;
                 }
                 else
                 {
-                    if (Find_letter(NewGram.Terminals, defLpart[j]))
-                    {
-                        return GrammarType = 1;
-                    }
-                    else
+                    if (GrammarType != 1)
                     {
                         GrammarType = 2;
                     }
-                }
-            }
-            if (RLen < 3)
-            {
-                if ((RLen == 1) && Find_letter(NewGram.Terminals, defRpart[0]))
-                {
-                    GrammarType = 3;
-                }
-                else
-                {
-                    if ((Find_letter(NewGram.Terminals, defRpart[0]) && Find_letter(NewGram.NTerminals, defRpart[1])) ||
-                        (Find_letter(NewGram.Terminals, defRpart[1]) && Find_letter(NewGram.NTerminals, defRpart[0])))
-                    {
-                        GrammarType = 3;
-                    }
-                    else
-                    {
-                        GrammarType = 2;
-                    }
-                }
-            }
 
+                }
+            }
         }
-        return GrammarType;
-    };
+        if (RLen < 3 && GrammarType >= 2)
+        {
+            if ((RLen == 1) && Find_letter(NewGram.Terminals, defRpart[0]))
+            {
+                GrammarType = 3;
+            }
+            else
+            {
+                if (Find_letter(NewGram.Terminals, defRpart[0]) && Find_letter(NewGram.NTerminals, defRpart[1]))
+
+                {
+                    GrammarType = 3.2;
+                }
+                else
+                {
+                    if (Find_letter(NewGram.Terminals, defRpart[1]) && Find_letter(NewGram.NTerminals, defRpart[0]))
+                    {
+                        GrammarType = 3.1;
+                    }
+                    else
+                    {
+                        GrammarType = 2;
+                    }
+                }
+
+            }
+        }
+
+    }
+    return GrammarType;
 };
 
 bool Find_letter(string stroke, char letter)
@@ -188,7 +203,7 @@ int main()
     }
     out.pop_back();
     cout << out << endl;
-    out = "";
+    out.clear();
 
     cout << "Vn = ";
     for (int i = 0; i < NewGram.NTerminals.length(); i++)
@@ -206,6 +221,6 @@ int main()
     }
 
     cout << "-----------------------------------------------\n";
-    cout << "Your grammar type: " << NewGram.DefineGrammarType(NewGram) << endl;
+    cout << "Your grammar type: " << DefineGrammarType(NewGram) << endl;
     cout << "-----------------------------------------------\n";
 }
